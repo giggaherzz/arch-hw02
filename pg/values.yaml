@@ -1,0 +1,6 @@
+postgresqlUsername: user
+postgresqlPassword: pass
+postgresqlDatabase: hw02
+
+persistence:
+  size: 1Gi

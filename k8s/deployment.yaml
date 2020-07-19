@@ -22,10 +22,10 @@ spec:
                   name: postgres-configmap
                   key: db_uri
             - name: spring.datasource.username
-                valueFrom:
-                  configMapKeyRef:
-                    name: postgres-configmap
-                    key: db_user
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-configmap
+                  key: db_user
             - name: spring.datasource.password
               valueFrom:
                 secretKeyRef:
