@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-configmap
+data:
+  db_uri: jdbc:postgresql://pg-postgresql:5432/hw02
+  db_user: user
+  V1_1__create_schema.sql: |
+    create schema if not exists hw02;
+  V1_2__create_table.sql: |
+    create table if not exists hw02.users
+    (id serial, name varchar, email varchar);
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: postgres-secret
+type: Opaque
+data:
+  db_pass: cGFzcw==
