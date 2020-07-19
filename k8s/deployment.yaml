@@ -12,6 +12,28 @@ spec:
       labels:
         app: arch-hw02-app
     spec:
+      initContainers:
+        - name: flyway
+          image: boxfuse/flyway
+          args:
+            - info
+            - repair
+            - migrate
+            - info
+          env:
+            - name: FLYWAY_URL
+              value: jdbc:postgresql://pg-postgresql:5432/hw02
+            - name: FLYWAY_USER
+              value: user
+            - name: FLYWAY_PASSWORD
+              value: pass
+          volumeMounts:
+            - mountPath: /flyway/sql
+              name: sql
+      volumes:
+        - name: sql
+          configMap:
+            name: postgres-configmap
       containers:
         - name: arch-hw02
           image: giggaherzz/arch-hw02:latest
