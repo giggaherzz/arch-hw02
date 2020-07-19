@@ -1,0 +1,214 @@
+{
+  "info": {
+    "_postman_id": "e2f1b0b4-5c5a-41b5-8e21-499c5801d40e",
+    "name": "arch-hw02",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "create",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "a4e23f19-24b2-4884-955c-80cb0bfae6d3",
+            "exec": [
+              "var responseJSON = JSON.parse(responseBody)",
+              "pm.collectionVariables.set(\"id\", responseJSON[\"id\"])"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Host",
+            "value": "arch.homework",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"name\":\"asdasd\",\"email\":\"asda@gmail.com\"}"
+        },
+        "url": {
+          "raw": "http://{{baseUrl}}/otusapp/victor/user",
+          "protocol": "http",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "otusapp",
+            "victor",
+            "user"
+          ],
+          "query": [
+            {
+              "key": "",
+              "value": null,
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Host",
+            "value": "arch.homework",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://{{baseUrl}}/otusapp/victor/user/{{id}}",
+          "protocol": "http",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "otusapp",
+            "victor",
+            "user",
+            "{{id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get_all",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Host",
+            "value": "arch.homework",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://{{baseUrl}}/otusapp/victor/user",
+          "protocol": "http",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "otusapp",
+            "victor",
+            "user"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "update",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Host",
+            "value": "arch.homework",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"id\": {{id}},\n    \"name\": \"qwe\",\n    \"email\": \"qwe@gmail.com\"\n}"
+        },
+        "url": {
+          "raw": "http://{{baseUrl}}/otusapp/victor/user",
+          "protocol": "http",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "otusapp",
+            "victor",
+            "user"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "delete",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Host",
+            "value": "arch.homework",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://{{baseUrl}}/otusapp/victor/user/{{id}}",
+          "protocol": "http",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "otusapp",
+            "victor",
+            "user",
+            "{{id}}"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "id": "2d21fa3f-bd43-4d1e-aa1a-7d53cd600cb7",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "id": "d004b4ad-d12d-4458-a434-ee0dfee8bbf6",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "id": "84689ee7-92d4-4850-9905-f815ceb7f66e",
+      "key": "id",
+      "value": ""
+    },
+    {
+      "id": "a141f9be-fb3d-4407-b2db-c0fdcb872024",
+      "key": "baseUrl",
+      "value": "192.168.64.3"
+    }
+  ],
+  "protocolProfileBehavior": {}
+}
