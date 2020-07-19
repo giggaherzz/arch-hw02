@@ -3,8 +3,8 @@ kind: ConfigMap
 metadata:
   name: postgres-configmap
 data:
-  db_uri: jdbc:postgresql://pg-postgresql:5432/hw02
-  db_user: user
+  db_uri: jdbc:postgresql://{{ (include "postgresql.fullname" .) }}-postgresql:{{ .Values.postgresql.service.port }}/{{ .Values.postgresql.postgresqlDatabase }}
+  db_user: {{ .Values.postgresql.postgresqlUsername }}
   V1_1__create_schema.sql: |
     create schema if not exists hw02;
   V1_2__create_table.sql: |
@@ -18,4 +18,4 @@ metadata:
   name: postgres-secret
 type: Opaque
 data:
-  db_pass: cGFzcw==
+  db_pass: {{ printf "%s" .Values.postgresql.postgresqlPassword | b64enc | quote }}

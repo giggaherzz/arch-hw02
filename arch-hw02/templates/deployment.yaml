@@ -1,0 +1,81 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "arch-hw02.fullname" . }}
+  labels:
+    {{- include "arch-hw02.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "arch-hw02.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+      {{- include "arch-hw02.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: {{ .Values.image.app }}
+          env:
+            - name: spring.datasource.url
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-configmap
+                  key: db_uri
+            - name: spring.datasource.username
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-configmap
+                  key: db_user
+            - name: spring.datasource.password
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: db_pass
+          ports:
+            - name: http
+              containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+            failureThreshold: 1
+            periodSeconds: 10
+      initContainers:
+        - name: flyway
+          image: {{ .Values.image.flyway }}
+          args:
+            - info
+            - repair
+            - migrate
+            - info
+          env:
+            - name: FLYWAY_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-configmap
+                  key: db_uri
+            - name: FLYWAY_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-configmap
+                  key: db_user
+            - name: FLYWAY_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: db_pass
+          volumeMounts:
+            - mountPath: /flyway/sql
+              name: sql
+      volumes:
+        - name: sql
+          configMap:
+            name: postgres-configmap
