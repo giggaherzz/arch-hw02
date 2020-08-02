@@ -1,5 +1,6 @@
 package org.otus.controller;
 
+import io.micrometer.core.annotation.Timed;
 import lombok.RequiredArgsConstructor;
 import org.otus.entity.User;
 import org.otus.repository.UserRepo;
@@ -7,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Timed(histogram = true)
 @RestController
 @RequiredArgsConstructor
 public class UserController {

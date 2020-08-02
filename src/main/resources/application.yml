@@ -3,3 +3,13 @@ spring:
     url: jdbc:postgresql://localhost:5432/base
     username: login
     password: password
+management:
+  health:
+    db:
+      enabled: false
+  server:
+    port: 8081
+  endpoints:
+    web:
+      exposure:
+        include: health, prometheus, info
