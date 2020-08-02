@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Timed(histogram = true)
+@Timed(histogram = true, percentiles = {0.5, 0.95, 0.99})
 @RestController
 @RequiredArgsConstructor
 public class UserController {

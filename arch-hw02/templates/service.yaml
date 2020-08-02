@@ -10,3 +10,7 @@ spec:
   ports:
     - port: {{ .Values.service.port }}
       targetPort: http
+      name: web
+    - port: {{ .Values.service.actuator.port }}
+      targetPort: actuator
+      name: actuator

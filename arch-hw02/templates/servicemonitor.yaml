@@ -2,17 +2,17 @@
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: {{ include "hello-chart.fullname" . }}
+  name: {{ include "arch-hw02.fullname" . }}
   labels:
-    {{- include "hello-chart.labels" . | nindent 4 }}
+    {{- include "arch-hw02.labels" . | nindent 4 }}
 spec:
-  jobLabel: {{ include "hello-chart.fullname" . }}
+  jobLabel: {{ include "arch-hw02.fullname" . }}
   namespaceSelector:
     matchNames:
       - "{{ $.Release.Namespace }}"
   selector:
     matchLabels:
-      {{- include "hello-chart.selectorLabels" . | nindent 6 }}
+      {{- include "arch-hw02.selectorLabels" . | nindent 6 }}
   endpoints:
     - interval: 15s
       port: actuator

@@ -10,6 +10,12 @@ fullnameOverride: ""
 
 service:
   port: 80
+  actuator:
+    port: 8081
+
+metrics:
+  serviceMonitor:
+    enabled: true
 
 ingress:
   enabled: true
